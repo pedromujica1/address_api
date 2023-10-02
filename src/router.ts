@@ -21,22 +21,6 @@ import { createCidade } from './app/useCases/cidades/createCidade';
 import { listCidades } from './app/useCases/cidades/listCidades';
 export const router = Router();
 
-//configuração do multer
-//pega arquivos e salva na pasta uploads
-const upload = multer({
-	//configurar armazenamento
-	storage: multer.diskStorage({
-		//configurar destino
-		destination(req, file, callback){
-			callback(null, path.resolve(__dirname, '..', 'uploads'));
-		},
-		//configura nome do arquivo
-		filename(req, file, callback){
-			callback(null, `${Date.now()}-${file.originalname}`);
-		},
-	})
-
-});
 
 //configurando caminhos do objeto router
 
