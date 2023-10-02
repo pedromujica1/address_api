@@ -1,7 +1,5 @@
 //importando funções e objetos 
-import path from 'node:path';
 import { Router } from 'express';
-import multer from 'multer';
 
 //Endereço
 import { listEndereco } from './app/useCases/enderecos/listEndereco';
