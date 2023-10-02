@@ -2,15 +2,23 @@
 import path from 'node:path';
 import { Router } from 'express';
 import multer from 'multer';
-import { listCategories } from './app/useCases/categories/listCategories';
-import { createCategory } from './app/useCases/categories/createCategory';
-import { listProducts } from './app/useCases/products/listProducts';
-import { createProduct } from './app/useCases/products/createProduct';
-import { listProductsByCategory } from './app/useCases/categories/listProductsByCategory';
-import { listOrders } from './app/useCases/orders/listOrders';
-import { createOrder } from './app/useCases/orders/createOrder';
-import { changeOrderStatus } from './app/useCases/orders/changeOrderStatus';
-import { cancelOrder } from './app/useCases/orders/cancelOrder';
+
+//Endereço
+import { listEndereco } from './app/useCases/enderecos/listEndereco';
+import { createEndereco } from './app/useCases/enderecos/createEndereco';
+
+//Endereço By ID
+import { listEnderecoByBairro } from './app/useCases/enderecos/listEnderecoByBairro';
+import { listEnderecoByCidade } from './app/useCases/enderecos/listEnderecoByCidade';
+
+
+//Bairro
+import { listBairros } from './app/useCases/bairros/listBairros';
+import { createBairro } from './app/useCases/bairros/createBairro';
+
+//cidades
+import { createCidade } from './app/useCases/cidades/createCidade';
+import { listCidades } from './app/useCases/cidades/listCidades';
 export const router = Router();
 
 //configuração do multer
@@ -32,29 +40,26 @@ const upload = multer({
 
 //configurando caminhos do objeto router
 
-//List categories
-router.get('/categories', listCategories);
+//List enderecos
+router.get('/enderecos', listEndereco);
 
-//Create category
-router.post('/categories', createCategory);
+//Create enderecos
+router.post('/enderecos', createEndereco);
 
-//List products
-router.get('/products', listProducts);
+//Get bairro by category
+router.get('/enderecos/:bairroId/bairros', listEnderecoByBairro);
 
-//Create products
-router.post('/products', upload.single('image'), createProduct);
+//Get bairro
+router.get('/enderecos/:cidadeId/cidades', listEnderecoByCidade);
 
-//Get products by category
-router.get('/categories/:categoryId/products', listProductsByCategory);
+//List bairros
+router.get('/bairros', listBairros);
 
-//List orders
-router.get('/orders', listOrders);
+//create bairros
+router.post('/bairros', createBairro);
 
-//Create orders
-router.post('/orders', createOrder);
+//create cidades
+router.post('/cidades', createCidade);
 
-//Change orders status/ patch e nao put por ser uma alteração parcial
-router.patch('/orders/:orderId', changeOrderStatus);
-
-//Delete/cancel order
-router.delete('/orders/:orderId', cancelOrder);
+//list cidades
+router.get('/cidades',listCidades);
